@@ -1,0 +1,4 @@
+variable "stgac" {
+   type = map() 
+  
+}

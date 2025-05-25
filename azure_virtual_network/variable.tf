@@ -1,0 +1,4 @@
+variable "vnetss" {
+   type = map() 
+  
+}
