@@ -6,6 +6,6 @@ resource "azurerm_storage_account" "storageacnt" {
   location                 = each.value.location
   account_tier             = "Standard" # Assuming a fixed account tier, modify if needed
   account_replication_type = each.value.account_replication_type
-  access_tier              = each.value.access_tier
+  
 }
 
