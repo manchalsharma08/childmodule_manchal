@@ -1,0 +1,56 @@
+
+
+trigger:
+- main
+
+pool: Default
+
+stages:
+- stage: terraformInstall
+  displayName: "terraform Install stage"
+  jobs:
+  - job: terraformInsatllJob
+    displayName: "terraform Insatll Job"
+    steps:
+     - task: TerraformInstaller@1
+       inputs:
+         terraformVersion: 'latest'
+- stage: InfraCreateStage
+  displayName: Infra Creat Stage with init ,FMT, Validate, And Plan
+  jobs:
+  - job: InfraCreateJob
+    displayName: Infra Creat Job with init ,FMT, Validate, And Plan
+    steps:
+     - task: TerraformTask@5
+       inputs:
+         provider: 'azurerm'
+         command: 'init'
+         workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
+         backendServiceArm: 'AbhiSC'
+         backendAzureRmResourceGroupName: 'nastik-rg'
+         backendAzureRmStorageAccountName: 'nastikstorage875987hum'
+         backendAzureRmContainerName: 'nastikcon'
+         backendAzureRmKey: 'nastik.terraform.tfstate'
+     - task: TerraformTask@5
+       inputs:
+         provider: 'azurerm'
+         command: 'validate'
+         workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
+     - task: TerraformTask@5
+       inputs:
+         provider: 'azurerm'
+         command: 'plan'
+         workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
+         environmentServiceNameAzureRM: 'AbhiSC'
+- stage: InfrApplyStage
+  displayName: Infra-Terrafor-Apply
+  jobs:
+  - job: InfraApplyJob
+    displayName: Infra-terraform-Apply-Job-work
+    steps:
+     - task: TerraformTask@5
+       inputs:
+         provider: 'azurerm'
+         command: 'apply'
+         workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
+         environmentServiceNameAzureRM: 'AbhiSC'
