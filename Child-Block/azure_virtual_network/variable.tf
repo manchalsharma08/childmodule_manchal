@@ -1,4 +1,4 @@
 variable "vnetss" {
-   type = map() 
+   type = map(any) 
   
 }

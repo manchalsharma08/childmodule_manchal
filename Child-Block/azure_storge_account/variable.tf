@@ -1,4 +1,4 @@
 variable "stgac" {
-   type = map() 
+   type = map(any)
   
 }
