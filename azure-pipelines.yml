@@ -51,6 +51,17 @@ stages:
      - task: TerraformTask@5
        inputs:
          provider: 'azurerm'
+         command: 'init'
+         workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
+         backendServiceArm: 'AbhiSC'
+         backendAzureRmResourceGroupName: 'nastik-rg'
+         backendAzureRmStorageAccountName: 'nastikstorage875987hum'
+         backendAzureRmContainerName: 'nastikcon'
+         backendAzureRmKey: 'nastik.terraform.tfstate'
+     - task: TerraformTask@5
+       inputs:
+         provider: 'azurerm'
          command: 'apply'
          workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
+         commandOptions: '--auto-approve'
          environmentServiceNameAzureRM: 'AbhiSC'
