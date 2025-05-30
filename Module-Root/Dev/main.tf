@@ -7,7 +7,7 @@ module "rg" {
 module "storage" {
     source = "../../Child-Block/azure_storge_account"
     stgac = var.project-st
-    depends_on = [ "module.rg" ]
+    depends_on = [ module.rg ]
   }
 
 
