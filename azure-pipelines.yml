@@ -43,6 +43,7 @@ stages:
          workingDirectory: '$(System.DefaultWorkingDirectory)/Module-Root/Dev'
          environmentServiceNameAzureRM: 'AbhiSC'
 - stage: InfrApplyStage
+  dependsOn: InfraCreateStage
   displayName: Infra-Terrafor-Apply
   jobs:
   - job: InfraApplyJob
